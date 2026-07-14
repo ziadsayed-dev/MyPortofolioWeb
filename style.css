@@ -1,0 +1,379 @@
+/* 1. المتغيرات وإعدادات الألوان الأساسية */
+:root {
+  --primary-color: #00C2FF;     /* Cyan */
+  --secondary-color: #00E5A8;   /* Mint */
+
+  --bg-dark: #08131F;           /* Main Background */
+  --bg-card: #13202F;           /* Cards */
+
+  --text-light: #F5F7FA;
+  --text-muted: #9CA9B8;
+
+  --border-color: #223247;
+
+  --tw-text-opacity: 1;
+
+  --transition-speed: 0.3s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-light);
+    font-weight: 900;
+}
+
+/* 3. الهيدر والقائمة الرئيسية */
+.header {
+  padding: 25px 10%;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo{
+  font-size: 42px;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-decoration: none;
+  color: white;
+  
+}
+
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: color var(--transition-speed) ease;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+}
+
+/* 4. قسم البداية (Hero Section) */
+.hero {
+  min-height: 85vh;
+  padding: 0 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hello {
+  color: var(--primary-color);
+}
+
+h1 {
+  font-size: 70px;
+  margin: 15px 0;
+}
+
+.hero h2 {
+  font-size: 35px;
+  color: var(--primary-color);
+}
+
+.description {
+  margin: 25px 0;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn, .btn-outline {
+  padding: 15px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all var(--transition-speed) ease;
+}
+
+.btn {
+  background: var(--primary-color);
+  color: #000;
+  font-weight: bold;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline:hover {
+  background: var(--primary-color);
+  color: #000;
+  font-weight: bold;
+  transform: translateY(-2px);
+}
+
+.hero-image img {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--primary-color);
+}
+.hero-image:hover{
+  transform: scale(1.5);
+  transition: 1s;
+
+}
+/* 5. الأقسام العامة */
+.section {
+  padding: 80px 10%;
+}
+
+.section h2 {
+  font-size: 35px;
+  margin-bottom: 30px;
+}
+
+.section p {
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* 6. المهارات والمشاريع */
+.skills-container, .projects-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.skill {
+  background: var(--bg-card);
+  padding: 20px 35px;
+  border-radius: 10px;
+  transition: transform var(--transition-speed) ease;
+}
+
+.skill:hover {
+  transform: translateY(-5px);
+}
+
+.project-card {
+  background: var(--bg-card);
+  padding: 30px;
+  border-radius: 15px;
+  width: 300px;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(245, 158, 11, 0.1);
+}
+
+.project-card h3 {
+  color: var(--primary-color);
+}
+
+.project-card p {
+  margin: 15px 0;
+}
+
+.project-card a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.project-card a:hover {
+  text-decoration: underline;
+}
+
+/* 7. الفوتر */
+footer {
+  text-align: center;
+  padding: 30px;
+  color: var(--text-muted);
+  border-top: 1px solid #1a1a1a;
+}
+
+/* 8. متجاوب مع الهواتف الذكية (Responsive Design) */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .nav-links {
+    gap: 15px;
+  }
+
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding-top: 40px;
+  }
+
+  .hero-image img {
+    width: 220px;
+    height: 220px;
+  }
+
+  h1 {
+    font-size: 45px;
+  }
+
+  .buttons {
+    justify-content: center;
+  }
+}
+
+#tsparticles {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+}
+.contact-container{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+
+.contact-info h3{
+    font-size:30px;
+    margin-bottom:20px;
+    color:var(--primary-color);
+}
+
+
+.contact-info p{
+    max-width:450px;
+    margin-bottom:30px;
+}
+
+
+.contact-item{
+    background:var(--bg-card);
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:15px;
+    border:1px solid var(--border-color);
+}
+
+
+.contact-item span{
+    display:block;
+    color:var(--text-muted);
+    margin-bottom:8px;
+}
+
+
+.contact-item a{
+    color:var(--primary-color);
+    text-decoration:none;
+}
+
+
+
+.contact-form{
+    background:var(--bg-card);
+    padding:35px;
+    border-radius:20px;
+    border:1px solid var(--border-color);
+    max-width:100%;
+}
+
+
+.contact-form input,
+.contact-form textarea{
+
+    width:100%;
+    padding:15px 18px;
+    border-radius:10px;
+    border:1px solid var(--border-color);
+    background:#08131F;
+    color:white;
+    font-size:16px;
+    outline:none;
+    transition:.3s;
+}
+
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+
+    border-color:var(--primary-color);
+    box-shadow:0 0 10px rgba(0,194,255,.2);
+}
+
+
+.contact-form textarea{
+    resize:none;
+    height:160px;
+}
+
+
+.contact-form button{
+
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(
+        90deg,
+        var(--primary-color),
+        var(--secondary-color)
+    );
+
+    color:#000;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+
+.contact-form button:hover{
+
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(0,194,255,.3);
+
+}
+
+
+
+@media(max-width:768px){
+
+    .contact-container{
+        grid-template-columns:1fr;
+    }
+
+}

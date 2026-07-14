@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ziad Sayed | Frontend Developer</title>
+  <link rel="icon" href="images/MYICON.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="tsparticles"></div>
+  <header class="header">
+    <nav class="navbar">
+      <a href="#" class="logo">Ziad.</a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <p class="hello">Hello, I'm</p>
+        <h1>Ziad Sayed</h1>
+        <h2>Frontend Developer</h2>
+        <p class="description">
+          I build responsive and modern websites using HTML, CSS and JavaScript.
+        </p>
+        <div class="buttons">
+          <a href="#projects" class="btn">View Projects</a>
+          <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="btn-outline">Github</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="images/MYICON.png" alt="Ziad's Profile Picture">
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h2>About Me</h2>
+      <p>
+        I'm a frontend developer who enjoys creating clean user interfaces and learning new technologies.
+      </p>
+    </section>
+
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <div class="skills-container">
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">Git</div>
+        <div class="skill">Github</div>
+        <div class="skill">Bootstrap</div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div class="projects-container" id="projectsContainer">
+        </div>
+    </section>
+
+  <section id="contact" class="section">
+  <h2>Contact Me</h2>
+
+  <div class="contact-container">
+
+    <div class="contact-info">
+      <h3>Let's work together</h3>
+
+      <p>
+        Have a project in mind or want to discuss an opportunity?
+        Feel free to send me a message.
+      </p>
+
+      <div class="contact-item">
+        <span>Email</span>
+        <a href="mailto:zyadsayed155@gmail.com">zyadsayed155@gmail.com</a>
+      </div>
+
+      <div class="contact-item">
+        <span>Github</span>
+        <a href="https://github.com/ziadsayed-dev" target="_blank">
+          https://github.com/ziadsayed-dev
+        </a>
+      </div>
+    </div>
+
+
+    <form class="contact-form" action="https://formspree.io/f/YOUR_ID" method="POST">
+
+      <input 
+        type="text" 
+        name="name"
+        placeholder="Your Name"
+        required
+      >
+
+      <input 
+        type="email"
+        name="email"
+        placeholder="Your Email"
+        required
+      >
+
+      <textarea 
+        name="message"
+        placeholder="Your Message"
+        required>
+      </textarea>
+
+      <button type="submit">
+        Send Message
+      </button>
+
+    </form>
+
+  </div>
+</section>
+
+
+
+  <footer>
+    <p>&copy; 2026 Ziad Sayed. All rights reserved.</p>
+  </footer>
+<script src="https://cdn.jsdelivr.net/npm/@tsparticles/engine@4/tsparticles.engine.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tsparticles/slim@4/tsparticles.slim.bundle.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
