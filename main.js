@@ -447,3 +447,4 @@ if (contactForm) {
       submitBtn.disabled = false;
     }, 3000);
   });
+}
