@@ -407,28 +407,43 @@ window.addEventListener('error', () => {
 });
 const contactForm = document.getElementById("contactForm");
 
-contactForm.addEventListener("submit", async (e) => {
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitBtn.disabled = true;
 
     const formData = new FormData(contactForm);
 
     try {
-        const response = await fetch(contactForm.action, {
-            method: "POST",
-            body: formData,
-            headers: {
-                "Accept": "application/json"
-            }
-        });
-
-        if (response.ok) {
-            alert("Message sent successfully!");
-            contactForm.reset();
-        } else {
-            alert("Failed to send message.");
+      const response = await fetch(contactForm.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Accept": "application/json"
         }
+      });
+
+      if (response.ok) {
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+        contactForm.reset();
+      } else {
+        submitBtn.innerHTML = "Failed To Send!";
+      }
 
     } catch (error) {
-        alert("Something went wrong.");
+      submitBtn.innerHTML = "Something Went Wrong!";
+      console.error(error);
     }
-}); 
+
+    setTimeout(() => {
+      submitBtn.innerHTML = originalText;
+      submitBtn.disabled = false;
+    }, 3000);
+  });
