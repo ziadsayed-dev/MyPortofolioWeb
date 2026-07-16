@@ -1,6 +1,6 @@
 // ===== CONFIGURATION =====
 const CONFIG = {
-  FORM_ENDPOINT: 'https://formspree.io/f/xojgjzwe', // Replace with your Formspree ID
+  FORM_ENDPOINT: 'https://formspree.io/f/xwvgvjdo', // Replace with your Formspree ID
   TYPING_SPEED: 100,
   DELETING_SPEED: 50,
   COUNTER_DURATION: 2000,
