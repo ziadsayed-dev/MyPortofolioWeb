@@ -405,7 +405,6 @@ console.log('%c💻 Built with ❤️ using HTML, CSS & JavaScript', 'font-size:
 window.addEventListener('error', () => {
   hideLoader();
 });
-const contactForm = document.getElementById("contactForm");
 
 const contactForm = document.getElementById("contactForm");
 
