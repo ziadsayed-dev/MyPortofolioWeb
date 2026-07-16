@@ -1,8 +1,6 @@
 // ===== CONFIGURATION =====
 const CONFIG = {
   FORM_ENDPOINT: 'https://formspree.io/f/YOUR_FORM_ID', // Replace with your Formspree ID
-  DEFAULT_NAME: 'Ziad Sayed', // Your default name
-  DEFAULT_EMAIL: '', // Optional: Add your email if you want
   TYPING_SPEED: 100,
   DELETING_SPEED: 50,
   COUNTER_DURATION: 2000,
@@ -349,78 +347,19 @@ function initBackToTop() {
   });
 }
 
-// ===== CONTACT FORM WITH PRE-FILLED NAME =====
+// ===== CONTACT FORM =====
 function initContactForm() {
   const contactForm = document.getElementById("contactForm");
   if (!contactForm) return;
 
-  // Get form inputs
-  const nameInput = document.getElementById('name');
-  const emailInput = document.getElementById('email');
-  const messageInput = document.getElementById('message');
-
-  // ===== PRE-FILL NAME FROM LOCALSTORAGE OR CONFIG =====
-  if (nameInput) {
-    // Try to get saved name from localStorage
-    const savedName = localStorage.getItem('userName');
-    
-    if (savedName) {
-      nameInput.value = savedName;
-    } else {
-      // Use default name from config
-      nameInput.value = CONFIG.DEFAULT_NAME;
-      // Save it for next time
-      localStorage.setItem('userName', CONFIG.DEFAULT_NAME);
-    }
-  }
-
-  // ===== PRE-FILL EMAIL (Optional) =====
-  if (emailInput && CONFIG.DEFAULT_EMAIL) {
-    const savedEmail = localStorage.getItem('userEmail');
-    if (savedEmail) {
-      emailInput.value = savedEmail;
-    } else {
-      emailInput.value = CONFIG.DEFAULT_EMAIL;
-      localStorage.setItem('userEmail', CONFIG.DEFAULT_EMAIL);
-    }
-  }
-
-  // ===== SAVE NAME WHEN USER CHANGES IT =====
-  if (nameInput) {
-    nameInput.addEventListener('change', () => {
-      if (nameInput.value.trim()) {
-        localStorage.setItem('userName', nameInput.value.trim());
-      }
-    });
-
-    // Save on input (real-time)
-    nameInput.addEventListener('input', () => {
-      if (nameInput.value.trim()) {
-        localStorage.setItem('userName', nameInput.value.trim());
-      }
-    });
-  }
-
-  // ===== SAVE EMAIL WHEN USER CHANGES IT =====
-  if (emailInput) {
-    emailInput.addEventListener('change', () => {
-      if (emailInput.value.trim() && isValidEmail(emailInput.value)) {
-        localStorage.setItem('userEmail', emailInput.value.trim());
-      }
-    });
-  }
-
-  // ===== FORM SUBMISSION =====
   contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Validate form
     if (!validateForm(contactForm)) return;
 
     const submitBtn = contactForm.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
 
-    // Show loading state
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
     submitBtn.style.opacity = '0.7';
@@ -437,38 +376,20 @@ function initContactForm() {
       });
 
       if (response.ok) {
-        // Success
         submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
         submitBtn.style.background = 'linear-gradient(135deg, #00E5A8, #00C2FF)';
-        
-        // Reset form but keep name and email
         contactForm.reset();
-        
-        // Restore saved values
-        if (nameInput) {
-          const savedName = localStorage.getItem('userName') || CONFIG.DEFAULT_NAME;
-          nameInput.value = savedName;
-        }
-        
-        if (emailInput) {
-          const savedEmail = localStorage.getItem('userEmail') || CONFIG.DEFAULT_EMAIL;
-          if (savedEmail) emailInput.value = savedEmail;
-        }
-        
-        showNotification('Your message was sent successfully! 🎉', 'success');
+        showNotification('Your message was sent successfully!', 'success');
       } else {
-        // Error
         submitBtn.innerHTML = "Failed To Send!";
         showNotification('Failed to send message. Please try again.', 'error');
       }
     } catch (error) {
-      // Connection error
       submitBtn.innerHTML = "Error!";
       showNotification('Connection error. Please try again.', 'error');
       console.error('Form submission error:', error);
     }
 
-    // Reset button after 3 seconds
     setTimeout(() => {
       submitBtn.innerHTML = originalText;
       submitBtn.style.background = '';
@@ -703,28 +624,23 @@ function registerServiceWorker() {
 
 // ===== MAIN INITIALIZATION =====
 function init() {
-  // Show loader
   showLoader();
   updateLoader(20);
 
-  // Render projects
   renderProjects();
   updateLoader(40);
   
-  // Initialize AOS
   initAOS();
   updateLoader(50);
   
-  // Initialize typing effect
   initTypingEffect();
   updateLoader(60);
   
-  // Initialize all features
   initCounters();
   initNavbarScroll();
   initMobileMenu();
   initBackToTop();
-  initContactForm(); // This now includes pre-filled name
+  initContactForm();
   initSmoothScroll();
   initEmptyLinks();
   initSkillBars();
@@ -732,18 +648,15 @@ function init() {
   
   updateLoader(80);
   
-  // Initialize particles and parallax
   initParticles();
   initParallax();
   
-  // Register service worker
   registerServiceWorker();
   
   updateLoader(100);
   
   console.log('%c🚀 Ziad Sayed Portfolio', 'font-size: 20px; font-weight: bold; color: #00C2FF;');
   console.log('%c💻 Built with ❤️ using HTML, CSS & JavaScript', 'font-size: 14px; color: #9CA9B8;');
-  console.log('%c👤 Name pre-filled: ' + CONFIG.DEFAULT_NAME, 'font-size: 12px; color: #00E5A8;');
 }
 
 // ===== LOADER HANDLING =====
