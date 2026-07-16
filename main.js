@@ -274,6 +274,7 @@ function initNavbarScroll() {
 }
 
 // ===== MOBILE MENU =====
+// ===== MOBILE MENU =====
 function initMobileMenu() {
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
@@ -283,8 +284,11 @@ function initMobileMenu() {
   function toggleMenu() {
     const isOpen = navLinks.classList.toggle('active');
     menuToggle.classList.toggle('active');
-    navLinks.style.display = isOpen ? 'flex' : 'none';
     document.body.style.overflow = isOpen ? 'hidden' : '';
+    // إزالة display: none عند الفتح
+    if (isOpen) {
+      navLinks.style.display = 'flex';
+    }
   }
 
   menuToggle.addEventListener('click', toggleMenu);
@@ -293,16 +297,49 @@ function initMobileMenu() {
     link.addEventListener('click', () => {
       navLinks.classList.remove('active');
       menuToggle.classList.remove('active');
-      navLinks.style.display = 'none';
+      // إظهار القائمة بشكل صحيح عند الإغلاق
+      setTimeout(() => {
+        if (!navLinks.classList.contains('active')) {
+          navLinks.style.display = 'none';
+        }
+      }, 300);
       document.body.style.overflow = '';
     });
   });
 
+  // تعديل حدث الضغط على المستند
   document.addEventListener('click', (e) => {
+    // التأكد أن الضغط ليس على القائمة أو زر التبديل
     if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+      // إغلاق القائمة فقط إذا كانت مفتوحة
+      if (navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        menuToggle.classList.remove('active');
+        setTimeout(() => {
+          if (!navLinks.classList.contains('active')) {
+            navLinks.style.display = 'none';
+          }
+        }, 300);
+        document.body.style.overflow = '';
+      }
+    }
+  });
+
+  // منع إغلاق القائمة عند الضغط بزر الماوس الأيمن
+  document.addEventListener('contextmenu', (e) => {
+    // إذا كان الضغط داخل القائمة أو على زر التبديل، لا تفعل شيء
+    if (navLinks.contains(e.target) || menuToggle.contains(e.target)) {
+      return;
+    }
+    // إذا كانت القائمة مفتوحة، أغلقها
+    if (navLinks.classList.contains('active')) {
       navLinks.classList.remove('active');
       menuToggle.classList.remove('active');
-      navLinks.style.display = 'none';
+      setTimeout(() => {
+        if (!navLinks.classList.contains('active')) {
+          navLinks.style.display = 'none';
+        }
+      }, 300);
       document.body.style.overflow = '';
     }
   });
@@ -311,12 +348,15 @@ function initMobileMenu() {
     if (e.key === 'Escape' && navLinks.classList.contains('active')) {
       navLinks.classList.remove('active');
       menuToggle.classList.remove('active');
-      navLinks.style.display = 'none';
+      setTimeout(() => {
+        if (!navLinks.classList.contains('active')) {
+          navLinks.style.display = 'none';
+        }
+      }, 300);
       document.body.style.overflow = '';
     }
   });
 }
-
 // ===== BACK TO TOP BUTTON =====
 function initBackToTop() {
   const backToTopBtn = document.getElementById('backToTop');
