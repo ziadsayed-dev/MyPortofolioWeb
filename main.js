@@ -494,8 +494,7 @@ function initSmoothScroll() {
 
 // ===== PARTICLES.JS =====
 async function initParticles() {
-  if (!CONFIG.PARTICLES_ENABLED) return;
-  
+      
   try {
     if (typeof tsParticles === 'undefined' || typeof loadSlim === 'undefined') {
       console.warn('Particles library not loaded, skipping...');
