@@ -1,6 +1,6 @@
 // ===== CONFIGURATION =====
 const CONFIG = {
-  FORM_ENDPOINT: 'https://formspree.io/f/YOUR_FORM_ID', // Replace with your Formspree ID
+  FORM_ENDPOINT: 'https://formspree.io/f/xojgjzwe', // Replace with your Formspree ID
   TYPING_SPEED: 100,
   DELETING_SPEED: 50,
   COUNTER_DURATION: 2000,
@@ -33,7 +33,6 @@ function showNotification(message, type = 'info') {
     align-items: center;
     gap: 10px;
     font-family: 'Poppins', sans-serif;
-    max-width: 400px;
   `;
   
   document.body.appendChild(notification);
@@ -688,7 +687,6 @@ if (process.env.NODE_ENV === 'development') {
     projects,
     showNotification,
     hideLoader,
-    showLoader,
-    validateForm
+    showLoader
   };
 }
