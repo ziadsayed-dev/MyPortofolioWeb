@@ -354,45 +354,73 @@ function initContactForm() {
   contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    if (!validateForm(contactForm)) return;
+    // 1️⃣ جلب البيانات من الفورم
+    const name = contactForm.querySelector('input[name="name"]');
+    const email = contactForm.querySelector('input[name="email"]');
+    const message = contactForm.querySelector('textarea[name="message"]');
 
+    // 2️⃣ التحقق من صحة البيانات
+    if (!name.value.trim()) {
+      showNotification('Please enter your name', 'error');
+      name.focus();
+      return;
+    }
+
+    if (!email.value.trim() || !isValidEmail(email.value)) {
+      showNotification('Please enter a valid email', 'error');
+      email.focus();
+      return;
+    }
+
+    if (!message.value.trim()) {
+      showNotification('Please enter your message', 'error');
+      message.focus();
+      return;
+    }
+
+    // 3️⃣ تغيير شكل الزر أثناء الإرسال
     const submitBtn = contactForm.querySelector('button[type="submit"]');
     const originalText = submitBtn.innerHTML;
-
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitBtn.disabled = true;
-    submitBtn.style.opacity = '0.7';
 
-    const formData = new FormData(contactForm);
+    // 4️⃣ تجهيز البيانات بصيغة JSON (وده التعديل المهم)
+    const formData = {
+      name: name.value,
+      email: email.value,
+      message: message.value
+    };
 
     try {
+      // 5️⃣ إرسال البيانات
       const response = await fetch(CONFIG.FORM_ENDPOINT, {
         method: "POST",
-        body: formData,
         headers: {
-          "Accept": "application/json"
-        }
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
       });
 
       if (response.ok) {
         submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
         submitBtn.style.background = 'linear-gradient(135deg, #00E5A8, #00C2FF)';
         contactForm.reset();
-        showNotification('Your message was sent successfully!', 'success');
+        showNotification('✅ Your message was sent successfully!', 'success');
       } else {
-        submitBtn.innerHTML = "Failed To Send!";
-        showNotification('Failed to send message. Please try again.', 'error');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to send');
       }
     } catch (error) {
-      submitBtn.innerHTML = "Error!";
-      showNotification('Connection error. Please try again.', 'error');
-      console.error('Form submission error:', error);
+      submitBtn.innerHTML = "Failed!";
+      showNotification('❌ Failed to send. Please try again.', 'error');
+      console.error('Form error:', error);
     }
 
+    // 6️⃣ إعادة الزر لوضعه الطبيعي بعد 3 ثواني
     setTimeout(() => {
       submitBtn.innerHTML = originalText;
       submitBtn.style.background = '';
-      submitBtn.style.opacity = '1';
       submitBtn.disabled = false;
     }, 3000);
   });
